@@ -5,7 +5,7 @@
       "Faz um filme de 30s da nova feature de busca, no estilo da Polar",
       "Quero um vídeo de produto do fluxo de checkout para a landing",
       "Cria um teaser animado do editor, só com código",
-      "Re-renderiza o filme do onboarding em 1440p",
+      "Re-renderiza o filme do onboarding",
       "Muda o tempo da cena 2 do filme e exporta de novo",
       "Make a product video like Linear's launch films"
     ],
@@ -59,7 +59,7 @@
       "id": "render-entrega",
       "prompt": "Exporta o filme na melhor qualidade para eu postar.",
       "expect": [
-        "renderiza em 1440p 60fps (ou 4K se pedido)",
+        "renderiza com npm run render (2560x1440, 60fps, a unica qualidade)",
         "confere o MP4 extraindo quadros",
         "entrega o caminho do arquivo e dos cues de áudio"
       ]

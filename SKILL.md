@@ -4,7 +4,7 @@ description: >-
   Faz filmes de produto 100% em código, no nível dos filmes da Polar (Emil Widlund):
   storyboard em TypeScript como dados, a UI real do produto montada em DOM, animação
   GSAP numa timeline mestra scrubável, preview ao vivo no navegador e render frame a
-  frame (Playwright + ffmpeg) em MP4 1080p, 1440p ou 4K. Use quando pedirem um filme,
+  frame (Playwright + ffmpeg) em MP4 2560x1440 60fps. Use quando pedirem um filme,
   vídeo, demo animada, motion de lançamento, teaser ou walkthrough de um produto ou
   feature; quando pedirem "um vídeo igual ao da Polar/Linear/Vercel"; ou para iterar,
   re-renderizar ou exportar um filme já feito com este sistema. Não use para gravação de
@@ -93,10 +93,9 @@ final quando os stills passarem.
 
 ### 5. Render
 
-Leia `references/render.md`. `npm run render` (1080p) para revisar,
-`npm run render:1440p` ou o botão "Baixar em 1440p" do preview para entregar,
-`npm run render:4k` quando pedirem 4K. Confira o MP4 extraindo quadros com ffmpeg
-antes de entregar. Os cues de áudio saem em `out/<id>.cues.json`.
+Leia `references/render.md`. `npm run render` (ou o botão "Baixar vídeo" do
+preview) gera o filme em 2560x1440, 60fps. É a única qualidade: não ofereça outra.
+Confira o MP4 extraindo quadros com ffmpeg antes de entregar. Os cues de áudio saem em `out/<id>.cues.json`.
 
 ## Regras de gosto (sempre ativas)
 

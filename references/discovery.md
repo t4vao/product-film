@@ -48,7 +48,6 @@ Pergunte em um bloco curto, com a sua sugestão em cada item:
 - Duração alvo e onde o filme vai passar (landing, rede social, apresentação).
 - Linguagem: cartões (padrão) ou janela do produto com câmera.
 - O fluxo exato, se o pedido não disser qual caminho do produto mostrar.
-- Resolução de entrega (padrão: 1440p 60fps).
 
 Não pergunte o que o repo responde (cor, fonte, rótulos). Não pergunte gosto
 (curva, ritmo): a skill já decide.

@@ -8,8 +8,6 @@
     "dev": "vite --port 5190 --strictPort",
     "typecheck": "tsc --noEmit",
     "render": "node scripts/render.mjs",
-    "render:1440p": "node scripts/render.mjs --height 1440",
-    "render:4k": "node scripts/render.mjs --height 2160",
     "stills": "node scripts/render.mjs --stills"
   },
   "dependencies": {

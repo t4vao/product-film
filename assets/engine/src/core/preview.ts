@@ -14,26 +14,24 @@ import { DEFAULT_FILM } from '../films'
 // URL: ?t=12.4 abre parado nesse tempo; ?scene=aceite abre repetindo aquela cena.
 
 /**
- * Botao de download. Pede ao servidor de desenvolvimento o render do filme aberto
- * em 2560x1440, 60fps, H.264 High (crf 12), mostra o progresso no proprio botao e
- * baixa o MP4 quando termina. A resolucao vem do servidor (HEIGHT em
- * scripts/download-plugin.ts), entao o rotulo e o arquivo nunca divergem.
- * O render roda quadro a quadro e leva alguns minutos; o preview segue livre.
+ * Botao "Baixar video". Pede ao servidor de desenvolvimento o render do filme
+ * aberto (2560x1440, 60fps, H.264 High, crf 12), mostra o progresso no proprio
+ * botao e baixa o MP4 quando termina. O render roda quadro a quadro e leva alguns
+ * minutos; o preview segue livre.
  */
 function mountDownload(film: string): HTMLButtonElement {
-  let height = 1440
-  const idle = () => `Baixar em ${height}p`
-  const button = h('button.pv-btn.pv-baixar', { type: 'button' }, idle())
+  const idle = 'Baixar vídeo'
+  const button = h('button.pv-btn.pv-baixar', { type: 'button' }, idle)
   let timer = 0
   const label = (text: string) => { button.textContent = text }
   const poll = async () => {
     const res = await fetch(`/__render/status?film=${film}`).then((r) => r.json()).catch(() => null)
     if (!res) return
     if (res.state === 'running') {
-      label(`Renderizando ${height}p… ${Math.floor(res.progress * 100)}%`)
+      label(`Renderizando… ${Math.floor(res.progress * 100)}%`)
       timer = window.setTimeout(poll, 1000)
     } else if (res.state === 'done') {
-      label(idle())
+      label(idle)
       button.disabled = false
       location.href = `/__render/file?film=${film}`
     } else if (res.state === 'error') {
@@ -45,15 +43,12 @@ function mountDownload(film: string): HTMLButtonElement {
   button.addEventListener('click', async () => {
     window.clearTimeout(timer)
     button.disabled = true
-    label(`Renderizando ${height}p… 0%`)
+    label('Renderizando… 0%')
     await fetch(`/__render/start?film=${film}`)
     poll()
   })
-  // Le a resolucao do servidor e, se um render ja estava rodando (pagina
-  // recarregada no meio), retoma o progresso.
+  // Se um render ja estava rodando (pagina recarregada no meio), retoma o progresso.
   fetch(`/__render/status?film=${film}`).then((r) => r.json()).then((res) => {
-    height = res.height ?? height
-    label(idle())
     if (res.state === 'running') { button.disabled = true; poll() }
   }).catch(() => undefined)
   return button

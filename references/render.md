@@ -11,17 +11,17 @@ quadro é calculado, então o vídeo é idêntico entre máquinas e nunca pula q
 
 | Comando | Saída |
 | --- | --- |
-| `npm run render` | 1920x1080 60fps, `out/<id>.mp4`, para revisar |
-| `npm run render:1440p` | 2560x1440 60fps, `out/<id>-1440p.mp4`, padrão de entrega |
-| `npm run render:4k` | 3840x2160 60fps, `out/<id>-2160p.mp4` |
+| `npm run render` | o filme: 2560x1440, 60fps, `out/<id>.mp4` |
 | `npm run render -- --scene <id>` | só uma cena |
 | `npm run render -- --from 6 --to 12` | um trecho |
 | `npm run stills -- 2.4,8,15` | PNGs em `out/stills/` |
 | `npm run stills` | um PNG no meio de cada cena |
-| botão "Baixar em 1440p" no preview | renderiza o filme aberto e baixa |
+| botão "Baixar vídeo" no preview | renderiza o filme aberto e baixa |
 
-Todos aceitam `--film <id>`. `--height N` renderiza o DOM direto em N linhas
-(escala N/1080): o texto é rasterizado no tamanho final, não ampliado.
+Todos aceitam `--film <id>`. Há uma qualidade só, de propósito: 2560x1440,
+60fps. O filme é desenhado em 1920x1080 lógicos e o navegador rasteriza direto em
+1440 linhas, então o texto sai nítido, sem ampliar imagem. Os stills saem em 1080
+para revisar rápido.
 
 ## Qualidade
 
@@ -29,7 +29,7 @@ Todos aceitam `--film <id>`. `--height N` renderiza o DOM direto em N linhas
 - O bitrate sai baixo em filmes de fundo liso (é qualidade constante, não perda).
 - Chromium com `--disable-lcd-text --font-render-hinting=none`: sem franja colorida.
 - Arquivo escrito como `.part.mp4` e renomeado no fim: download nunca pega metade.
-- Tempo aproximado (30s): 1080p ~2 min, 1440p ~4 min, 2160p ~6 min.
+- Tempo aproximado: uns 4 minutos para 30s de filme.
 
 ## Áudio
 

@@ -4,18 +4,14 @@
 // sem quadro pulado.
 //
 // Uso:
-//   npm run render                         filme inteiro -> out/exemplo.mp4
+//   npm run render                         filme inteiro -> out/exemplo.mp4 (2560x1440, 60fps)
 //   npm run render -- --film exemplo --scene acao
 //   npm run render -- --from 6.6 --to 15.6
-//   npm run render -- --scale 2             renderiza em 2x e reduz (texto mais nitido)
-//   npm run render:1440p                    2560x1440 60fps -> out/exemplo-1440p.mp4
-//   npm run render:4k                       3840x2160 60fps -> out/exemplo-2160p.mp4
-//   npm run render -- --height 1440         o mesmo, para qualquer altura
 //   npm run stills -- 0.5,3.4,12,29         PNGs desses tempos em out/stills/
 //   npm run stills                          um PNG no meio de cada cena
 //
 // --json troca a barra de progresso por linhas JSON ({"progress":0.42}), que e o
-// que o botao "Baixar em 1440p" do preview le.
+// que o botao "Baixar video" do preview le.
 //
 // ffmpeg: usa $FFMPEG se definido, senao o binario do pacote ffmpeg-static.
 
@@ -30,12 +26,10 @@ import { createServer } from 'vite'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const args = parseArgs(process.argv.slice(2))
 const filmId = args.film ?? 'exemplo'
-// --height: o DOM e desenhado direto na resolucao final (1440 = escala 4/3, 2160 =
-// escala 2), sem reduzir depois. O texto sai nitido porque e rasterizado no
-// tamanho de saida. 1440p e o padrao do botao: leve e ainda muito nitido.
-const height = args.height ? Number(args.height) : null
-const native = height !== null
-const scale = native ? height / 1080 : Number(args.scale ?? 1)
+// Uma qualidade so: 2560x1440, 60fps. O filme e desenhado em 1920x1080 logicos e
+// o navegador rasteriza direto em 1440 linhas (escala 4/3), entao o texto sai
+// nitido, sem ampliar uma imagem menor. Os stills saem em 1080 para revisar rapido.
+const OUTPUT_HEIGHT = 1440
 const json = args.json !== undefined
 
 const server = await createServer({ root, logLevel: 'error', server: { port: 0 } })
@@ -91,6 +85,7 @@ async function openFilm(b) {
   await probe.goto(`${url}?film=${filmId}&render`)
   const meta = await waitFilm(probe)
   await probe.close()
+  const scale = args.stills !== undefined ? 1 : OUTPUT_HEIGHT / meta.height
   const page = await b.newPage({ viewport: { width: meta.width, height: meta.height }, deviceScaleFactor: scale })
   await page.goto(`${url}?film=${filmId}&render`)
   await waitFilm(page)
@@ -134,7 +129,7 @@ async function video({ page, meta }) {
     to = scene.start + scene.duration
   }
   const total = Math.round((to - from) * meta.fps)
-  const suffix = (args.scene ? `-${args.scene}` : args.from || args.to ? `-${from}-${to}` : '') + (native ? `-${height}p` : '')
+  const suffix = (args.scene ? `-${args.scene}` : args.from || args.to ? `-${from}-${to}` : '') 
   const out = args.out ? join(root, args.out) : join(root, 'out', `${filmId}${suffix}.mp4`)
   mkdirSync(dirname(out), { recursive: true })
   // Escreve num arquivo temporario e so renomeia no fim: um download nunca pega
@@ -143,13 +138,10 @@ async function video({ page, meta }) {
 
   const ffmpegPath = process.env.FFMPEG ?? (await import('ffmpeg-static')).default
   // PNG sem perda entra pelo stdin; sai H.264 High com qualidade de master (crf 12)
-  // e yuv420p para tocar em qualquer lugar. Com --scale (sem --height), reduz com
-  // lanczos para 1080p.
-  const vf = scale !== 1 && !native ? ['-vf', `scale=${meta.width}:${meta.height}:flags=lanczos`] : []
+  // e yuv420p para tocar em qualquer lugar.
   const ff = spawn(ffmpegPath, [
     '-y', '-loglevel', 'error',
     '-f', 'image2pipe', '-framerate', String(meta.fps), '-i', '-',
-    ...vf,
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '12', '-profile:v', 'high', '-pix_fmt', 'yuv420p',
     '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
     '-movflags', '+faststart', partial,
