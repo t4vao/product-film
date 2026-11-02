@@ -1,0 +1,56 @@
+/* Visual do filme. TROQUE os tokens pelos do design system do produto (descoberta):
+   fonte, cor de destaque, raio, cinzas. A linguagem padrao e a de cartoes: cartao
+   claro quase sem raio, cabecalho em mono maiusculo com filete, texto grande. */
+.fx {
+  --ink: #141414;
+  --muted: #6e6e6c;
+  --rule: rgba(20, 20, 20, .16);
+  --paper: #dcdcd9;
+  --accent: #2f5bd3;                  /* TROQUE: cor de destaque do produto */
+  --accent-wash: rgba(47, 91, 211, .18);
+  --selection: #c9dcf8;               /* TROQUE: cor de selecao do produto */
+  --radius: 4px;                      /* TROQUE: raio pequeno da escala do produto */
+  --mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  position: absolute;
+  inset: 0;
+  color: var(--ink);
+}
+.fx p, .fx h2 { margin: 0; }
+
+.fx-slot { position: absolute; left: 380px; width: 1160px; }
+.fx-cartao { position: relative; border-radius: var(--radius); background: var(--paper); padding: 34px 48px 44px; transform-origin: 50% 0; }
+.fx-cabeca {
+  display: flex; justify-content: space-between; gap: 24px;
+  border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 32px;
+  color: var(--muted); font: 500 15px/20px var(--mono); letter-spacing: .06em; text-transform: uppercase;
+}
+.fx-legenda { display: flex; gap: 14px; margin-top: 26px; font-size: 24px; line-height: 32px; letter-spacing: -0.01em; }
+.fx-legenda strong { color: #f4f4f4; font-weight: 550; }
+.fx-legenda span { color: #8a8a8a; }
+.fx-rotulo { color: var(--muted); font: 500 15px/20px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+
+.fx-secao { margin-bottom: 14px !important; font-size: 22px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.fx-paragrafo { font-size: 36px; line-height: 54px; letter-spacing: -0.015em; text-wrap: pretty; }
+.fx-trecho { background-image: linear-gradient(var(--selection), var(--selection)); background-repeat: no-repeat; background-size: 0% 100%; }
+.fx-marcador { display: inline-block; width: 0; height: 1em; vertical-align: text-bottom; }
+.fx-lavado { border-radius: var(--radius); }
+
+.fx-titulo { margin-bottom: 18px !important; font-size: 34px; font-weight: 500; line-height: 42px; letter-spacing: -0.025em; }
+.fx-proposta { min-height: 114px; font-size: 28px; line-height: 38px; letter-spacing: -0.012em; }
+.fx-caret { display: inline-block; width: .55em; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: var(--ink); }
+.fx-fonte { display: grid; gap: 6px; margin-top: 28px; border-left: 3px solid var(--accent); padding-left: 18px; }
+.fx-fonte strong { font-size: 22px; font-weight: 500; }
+.fx-fonte small { color: var(--muted); font: 400 17px/22px var(--mono); }
+.fx-acoes { display: flex; justify-content: flex-end; gap: 12px; margin-top: 34px; }
+.fx-botao { display: inline-flex; height: 52px; align-items: center; gap: 10px; border: 1px solid rgba(20, 20, 20, .28); border-radius: 999px; padding: 0 24px; font-size: 21px; font-weight: 500; }
+.fx-botao.is-primario { border-color: var(--ink); background: var(--ink); color: #fff; }
+.fx-troca { display: grid; }
+.fx-troca > * { grid-area: 1 / 1; justify-self: end; }
+.fx-aceito { display: inline-flex; height: 52px; align-items: center; gap: 10px; color: var(--accent); font-size: 21px; font-weight: 550; }
+
+.fx-meta { display: flex; gap: 12px; margin-top: 34px; border-top: 1px solid var(--rule); padding-top: 18px; font-size: 21px; }
+.fx-meta .fx-quad { display: inline-block; width: 9px; height: 9px; margin: 0 10px 0 0; vertical-align: 2px; background: var(--accent); }
+
+.fx-marca { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 26px; color: #f4f4f4; }
+.fx-marca strong { font-size: 64px; font-weight: 500; letter-spacing: -0.04em; }
+.fx-marca p { color: #8a8a8a; font-size: 26px; letter-spacing: -0.02em; }

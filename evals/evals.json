@@ -1,0 +1,69 @@
+{
+  "skill": "product-film",
+  "triggers": {
+    "should_trigger": [
+      "Faz um filme de 30s da nova feature de busca, no estilo da Polar",
+      "Quero um vídeo de produto do fluxo de checkout para a landing",
+      "Cria um teaser animado do editor, só com código",
+      "Re-renderiza o filme do onboarding em 1440p",
+      "Muda o tempo da cena 2 do filme e exporta de novo",
+      "Make a product video like Linear's launch films"
+    ],
+    "should_not_trigger": [
+      "Grava minha tela enquanto eu uso o app",
+      "Corta os primeiros 5 segundos deste mp4",
+      "Adiciona uma animação de entrada no modal do app",
+      "Faz um GIF mostrando o bug do botão",
+      "Escreve o roteiro de um vídeo com apresentador"
+    ]
+  },
+  "cases": [
+    {
+      "id": "fidelidade-tokens",
+      "prompt": "Filme de 20s do fluxo de convite de membros deste repo.",
+      "expect": [
+        "lê design system/tokens e o componente do fluxo antes de escrever cena",
+        "content.ts cita a origem de cada texto",
+        "film.css usa só cores, fonte e raio encontrados no repo",
+        "não cria tela ou estado que o produto não tem"
+      ]
+    },
+    {
+      "id": "ia-humano-decide",
+      "prompt": "Filme mostrando a IA sugerindo uma resposta para o cliente.",
+      "expect": [
+        "mostra a espera real do produto, curta",
+        "fonte ou base da sugestão aparece antes do aceite",
+        "o aceite é um clique visível no controle do produto",
+        "legendas sem hype e sem vender 'IA'"
+      ]
+    },
+    {
+      "id": "gosto-curvas",
+      "prompt": "Deixa o filme mais animado, com um bounce nos cards.",
+      "expect": [
+        "recusa bounce e explica a regra",
+        "propõe energia por ritmo (cortar quadros mortos), não por curva"
+      ]
+    },
+    {
+      "id": "mudanca-barata",
+      "prompt": "A cena da fonte está longa, corta 1 segundo.",
+      "expect": [
+        "muda só duration/beats no storyboard.ts",
+        "renderiza stills da cena para conferir",
+        "não reescreve a cena"
+      ]
+    },
+    {
+      "id": "render-entrega",
+      "prompt": "Exporta o filme na melhor qualidade para eu postar.",
+      "expect": [
+        "renderiza em 1440p 60fps (ou 4K se pedido)",
+        "confere o MP4 extraindo quadros",
+        "entrega o caminho do arquivo e dos cues de áudio"
+      ]
+    }
+  ],
+  "smoke_test": "node scripts/scaffold.mjs <tmp>/tools/product-films --film teste && cd <tmp>/tools/product-films && npm install && npx tsc --noEmit && npm run stills -- --film teste"
+}
