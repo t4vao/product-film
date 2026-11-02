@@ -1,9 +1,23 @@
-# product-film
+# Product Film: an Agent Skill
 
-An agent skill for making product films entirely in code, at the level of
-Polar's launch films. The agent rebuilds your product's real UI in DOM, animates
-it with GSAP on one scrubbable timeline, and renders it frame by frame to a
-2560x1440, 60fps MP4.
+![Agent Skill](https://img.shields.io/badge/Agent-Skill-5b4ee6)
+![Output](https://img.shields.io/badge/output-1440p%2060fps-2ea44f)
+![Micro-interactions](https://img.shields.io/badge/micro--interactions-7-2ea44f)
+![Updated](https://img.shields.io/badge/updated-2026--11--02-e67e22)
+
+> A code-first workflow for making product films that **look designed, move with
+> intent, and stay true to your product**, packaged as an [Agent Skill](https://agentskills.io)
+> for Claude Code, Cursor, Codex, Copilot, Gemini, and any [skills.sh](https://skills.sh)-compatible agent.
+
+**Product films entirely in code**, in the spirit of **Polar's launch films by Emil
+Widlund**: a TypeScript storyboard as data, your product's **real UI rebuilt in
+DOM** from its own design system, **GSAP** on one scrubbable timeline, a **live
+preview** that updates as you edit, and a **frame-exact render** with Playwright
+and ffmpeg. The throughline is taste enforced in code: the movement serves the
+meaning, never the spectacle, and the human decides.
+
+> **Last updated:** 2 November 2026 **Version:** 1.1.0. Output is always a
+> 2560x1440, 60fps MP4. See [CHANGELOG](CHANGELOG.md) for what changed.
 
 ## Install
 
@@ -11,8 +25,18 @@ it with GSAP on one scrubbable timeline, and renders it frame by frame to a
 npx skills add t4vao/product-film
 ```
 
-Works with Claude Code, Cursor, Codex and any [skills](https://github.com/vercel-labs/skills)-compatible agent.
-Update with `npx skills update product-film`.
+This pulls the skill into your agent's skills directory (`.claude/skills/`,
+`.agents/skills/`, ...) and works with any Agent Skills-compatible agent.
+
+**Already installed it?** Pull the latest version with `npx skills update product-film`
+(or a bare `npx skills update` to refresh every installed skill). The command
+re-fetches from GitHub; your agent picks up the new content on its next session.
+
+Or install it manually:
+
+```bash
+git clone https://github.com/t4vao/product-film.git ~/.claude/skills/product-film
+```
 
 ## Use
 
