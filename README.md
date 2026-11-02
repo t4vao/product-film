@@ -31,14 +31,19 @@ timeline, so the video comes out identical on any machine and never drops a fram
 
 ## Install
 
-Claude Code (personal skill):
+```bash
+npx skills add t4vao/product-film
+```
+
+Works with Claude Code, Cursor, Codex and the other agents the
+[skills CLI](https://github.com/vercel-labs/skills) supports. Update later with
+`npx skills update product-film`.
+
+Or clone it as a personal Claude Code skill:
 
 ```bash
 git clone https://github.com/t4vao/product-film ~/.claude/skills/product-film
 ```
-
-Or per project, at `.claude/skills/product-film`. Other agents: point them at
-`SKILL.md` and the files it references.
 
 Requirements: Node 20+, and a Chromium for Playwright (`npx playwright install
 chromium` if none is found). ffmpeg comes from `ffmpeg-static`.
@@ -81,8 +86,8 @@ evals/evals.json            trigger and behavior cases
 ## Português
 
 Skill para agentes fazerem filmes de produto 100% em código, no nível dos filmes
-da Polar. O `SKILL.md` e as referências estão em português. Instale clonando em
-`~/.claude/skills/product-film`, rode o scaffold no repo do produto e peça:
+da Polar. O `SKILL.md` e as referências estão em português. Instale com
+`npx skills add t4vao/product-film`, rode o scaffold no repo do produto e peça:
 
 > Use a skill product-film. Filme de 30s sobre <feature>: <o usuário faz X, o
 > produto propõe Y com fonte, ele aceita, o resultado fica>. Linguagem de cartões.

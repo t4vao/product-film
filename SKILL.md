@@ -1,6 +1,14 @@
 ---
 name: product-film
-description: Faz filmes de produto 100% em código, no nível dos filmes da Polar (Emil Widlund): storyboard em TypeScript como dados, a UI real do produto montada em DOM, animação GSAP numa timeline mestra scrubável, preview ao vivo no navegador e render frame a frame (Playwright + ffmpeg) em MP4 1080p, 1440p ou 4K. Use quando pedirem um filme, vídeo, demo animada, motion de lançamento, teaser ou walkthrough de um produto ou feature; quando pedirem "um vídeo igual ao da Polar/Linear/Vercel"; ou para iterar, re-renderizar ou exportar um filme já feito com este sistema. Não use para gravação de tela real, edição de vídeo existente, GIF de bug ou animação de UI dentro do produto.
+description: >-
+  Faz filmes de produto 100% em código, no nível dos filmes da Polar (Emil Widlund):
+  storyboard em TypeScript como dados, a UI real do produto montada em DOM, animação
+  GSAP numa timeline mestra scrubável, preview ao vivo no navegador e render frame a
+  frame (Playwright + ffmpeg) em MP4 1080p, 1440p ou 4K. Use quando pedirem um filme,
+  vídeo, demo animada, motion de lançamento, teaser ou walkthrough de um produto ou
+  feature; quando pedirem "um vídeo igual ao da Polar/Linear/Vercel"; ou para iterar,
+  re-renderizar ou exportar um filme já feito com este sistema. Não use para gravação de
+  tela real, edição de vídeo existente, GIF de bug ou animação de UI dentro do produto.
 ---
 
 # Filmes de produto em código
